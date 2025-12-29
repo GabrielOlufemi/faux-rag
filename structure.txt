@@ -1,0 +1,50 @@
+1. User uploads PDF
+   ↓
+2. FastAPI receives file
+   ↓
+3. Extract text (PyPDF2)
+   ↓
+4. Split into chunks (RecursiveCharacterTextSplitter)
+   ↓
+5. Generate embeddings (Sentence Transformers)
+   ↓
+6. Store in Pinecone with metadata
+   ↓
+7. User asks question
+   ↓
+8. Convert question to embedding
+   ↓
+9. Search Pinecone for relevant chunks
+   ↓
+10. Send chunks + question to Gemini
+    ↓
+11. Return Gemini's response to user
+
+
+## **Project Structure:**
+```
+Faux-RAG/
+├── frontend/                    # custom HTML/CSS/JS
+│   ├── index.html
+│   ├── styles.css
+│   ├── app.js
+│   └── assets/
+├── app/
+│   ├── __init__.py
+│   ├── main.py                  # FastAPI app
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── upload.py            # Upload endpoints
+│   │   └── chat.py              # Chat endpoints
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── document_processor.py  # PDF/DOCX processing
+│   │   ├── embeddings.py        # Sentence Transformers
+│   │   ├── vector_store.py      # Pinecone operations
+│   │   └── llm.py               # Gemini integration
+│   └── config.py                # Configuration
+├── uploads/                     # Temporary file storage
+├── .env
+├── .gitignore
+├── requirements.txt
+└── README.md
